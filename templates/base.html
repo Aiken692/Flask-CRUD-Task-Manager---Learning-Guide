@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Task Manager{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- 
+    TEMPLATE INHERITANCE:
+    This is the base template. Other templates will "extend" this one.
+    They can override blocks like 'title' and 'content'
+    -->
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <h1>📝 Task Manager - Learn Flask CRUD</h1>
+            <nav>
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('add_task') }}" class="nav-link">Add Task</a>
+            </nav>
+        </header>
+
+        <!-- FLASH MESSAGES -->
+        <!-- These show success/error messages to the user -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash flash-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- MAIN CONTENT -->
+        <!-- This block will be replaced by content from child templates -->
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>Built with Flask 🐍 | Learning CRUD Operations</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!-- 
+EDIT TASK PAGE - UPDATE Operation
+This page shows a form to edit an existing task
+-->
+{% extends 'base.html' %} {% block title %}Edit Task - Task Manager{% endblock
+%} {% block content %}
+<div class="form-container">
+  <h2>✏️ Edit Task</h2>
+
+  <!-- 
+    FORM PRE-FILLED WITH EXISTING DATA:
+    Notice how we use {{ task.title }} to show current values
+    This is called "value binding" - connecting form to data
+    -->
+  <form
+    method="POST"
+    action="{{ url_for('edit_task', task_id=task.id) }}"
+    class="task-form"
+  >
+    <!-- TITLE FIELD (Pre-filled) -->
+    <div class="form-group">
+      <label for="title">Task Title *</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        value="{{ task.title }}"
+        required
+        maxlength="100"
+        class="form-input"
+      />
+      <small>Update the task title (Required, max 100 characters)</small>
+    </div>
+
+    <!-- DESCRIPTION FIELD (Pre-filled) -->
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        name="description"
+        rows="4"
+        maxlength="200"
+        class="form-input"
+      >
+{{ task.description if task.description else '' }}</textarea
+      >
+      <small>Update the description (Optional, max 200 characters)</small>
+    </div>
+
+    <!-- TASK INFO -->
+    <div class="task-info">
+      <p>
+        <strong>Created:</strong> {{ task.created_at.strftime('%B %d, %Y at
+        %I:%M %p') }}
+      </p>
+      <p>
+        <strong>Status:</strong>
+        {% if task.completed %}
+        <span class="status-badge completed">✓ Completed</span>
+        {% else %}
+        <span class="status-badge pending">⏳ Pending</span>
+        {% endif %}
+      </p>
+    </div>
+
+    <!-- SUBMIT BUTTONS -->
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">💾 Save Changes</button>
+      <a href="{{ url_for('index') }}" class="btn btn-secondary"> ✕ Cancel </a>
+    </div>
+  </form>
+</div>
+
+<!-- LEARNING NOTES -->
+<div class="learning-notes">
+  <h3>🎓 Understanding UPDATE Operations:</h3>
+  <ul>
+    <li>
+      <strong>Dynamic URLs:</strong> /edit/&lt;int:task_id&gt; captures the task
+      ID from URL
+    </li>
+    <li>
+      <strong>Query Database:</strong> Task.query.get_or_404(task_id) finds the
+      task or shows 404
+    </li>
+    <li>
+      <strong>Pre-fill Form:</strong> value="{{ task.title }}" shows existing
+      data
+    </li>
+    <li>
+      <strong>Update Object:</strong> We modify the task object's properties
+    </li>
+    <li>
+      <strong>Commit Changes:</strong> db.session.commit() saves changes to
+      database
+    </li>
+    <li>
+      <strong>No db.session.add():</strong> Not needed for updates, only for new
+      objects
+    </li>
+  </ul>
+</div>
+
+<!-- EXAMPLE WALKTHROUGH -->
+<div class="example-box">
+  <h4>📚 Update Flow:</h4>
+  <ol>
+    <li>User clicks "Edit" on a task</li>
+    <li>Browser goes to /edit/5 (where 5 is the task ID)</li>
+    <li>Flask finds task with ID 5 in database</li>
+    <li>Form shows with current task data</li>
+    <li>User modifies the fields</li>
+    <li>Clicks "Save Changes"</li>
+    <li>Flask updates the task object: task.title = new_title</li>
+    <li>Commits to database: db.session.commit()</li>
+    <li>Redirects to home with updated task!</li>
+  </ol>
+</div>
+
+<!-- KEY DIFFERENCE -->
+<div class="tip-box">
+  <h4>💡 CREATE vs UPDATE:</h4>
+  <table class="comparison-table">
+    <tr>
+      <th>Operation</th>
+      <th>CREATE (Add)</th>
+      <th>UPDATE (Edit)</th>
+    </tr>
+    <tr>
+      <td>Object</td>
+      <td>new_task = Task(...)</td>
+      <td>task = Task.query.get(id)</td>
+    </tr>
+    <tr>
+      <td>Modify</td>
+      <td>Set initial values</td>
+      <td>task.title = new_value</td>
+    </tr>
+    <tr>
+      <td>Save</td>
+      <td>db.session.add(new_task)<br />db.session.commit()</td>
+      <td>db.session.commit()</td>
+    </tr>
+  </table>
+</div>
+{% endblock %}

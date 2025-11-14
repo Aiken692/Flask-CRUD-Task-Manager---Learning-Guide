@@ -1,0 +1,85 @@
+<!-- 
+ADD TASK PAGE - CREATE Operation
+This page shows a form to create a new task
+-->
+{% extends 'base.html' %}
+
+{% block title %}Add Task - Task Manager{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>➕ Add New Task</h2>
+    
+    <!-- 
+    FORM EXPLANATION:
+    - method="POST": Sends data to server securely
+    - action: Where to send the form (empty means current URL)
+    -->
+    <form method="POST" action="{{ url_for('add_task') }}" class="task-form">
+        
+        <!-- TITLE FIELD (Required) -->
+        <div class="form-group">
+            <label for="title">Task Title *</label>
+            <input 
+                type="text" 
+                id="title" 
+                name="title" 
+                placeholder="e.g., Learn Flask basics"
+                required
+                maxlength="100"
+                class="form-input">
+            <small>What do you need to do? (Required, max 100 characters)</small>
+        </div>
+        
+        <!-- DESCRIPTION FIELD (Optional) -->
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea 
+                id="description" 
+                name="description" 
+                rows="4"
+                placeholder="Add more details about this task..."
+                maxlength="200"
+                class="form-input"></textarea>
+            <small>Optional: Add more details (max 200 characters)</small>
+        </div>
+        
+        <!-- SUBMIT BUTTONS -->
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                ✓ Add Task
+            </button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                ✕ Cancel
+            </a>
+        </div>
+    </form>
+</div>
+
+<!-- LEARNING NOTES -->
+<div class="learning-notes">
+    <h3>🎓 What's Happening Here:</h3>
+    <ul>
+        <li><strong>HTML Forms:</strong> Collect user input and send it to the server</li>
+        <li><strong>POST Method:</strong> Used for creating/modifying data (more secure than GET)</li>
+        <li><strong>name Attribute:</strong> The "name" in inputs is how we access data in Flask (request.form.get('title'))</li>
+        <li><strong>required Attribute:</strong> Browser validates before submitting</li>
+        <li><strong>Flask Route:</strong> The form submits to the add_task() function in app.py</li>
+    </ul>
+</div>
+
+<!-- EXAMPLE WALKTHROUGH -->
+<div class="example-box">
+    <h4>📚 How This Works:</h4>
+    <ol>
+        <li>User fills in the form fields</li>
+        <li>Clicks "Add Task" button</li>
+        <li>Browser sends POST request to /add route</li>
+        <li>Flask receives data in request.form</li>
+        <li>Creates new Task object</li>
+        <li>Saves to database with db.session.add() and db.session.commit()</li>
+        <li>Redirects back to home page</li>
+        <li>New task appears in the list!</li>
+    </ol>
+</div>
+{% endblock %}

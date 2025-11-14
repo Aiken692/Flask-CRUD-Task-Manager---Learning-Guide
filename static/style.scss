@@ -1,0 +1,65 @@
+// Variables
+$primary-color: #667eea;
+$secondary-color: #764ba2;
+$text-dark: #333;
+$text-light: #666;
+$bg-light: #f8f9fa;
+$white: white;
+
+// Reset
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// Body styles
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+// Container
+.container {
+    background: $white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    
+    h1 {
+        color: $text-dark;
+        margin-bottom: 20px;
+        font-size: 2.5em;
+    }
+    
+    p {
+        color: $text-light;
+        font-size: 1.2em;
+        line-height: 1.6;
+    }
+}
+
+// Welcome text section
+.welcome-text {
+    margin-top: 20px;
+    padding: 20px;
+    background: $bg-light;
+    border-radius: 5px;
+    border-left: 4px solid $primary-color;
+    
+    p {
+        &:first-child {
+            strong {
+                color: $text-dark;
+            }
+        }
+    }
+}
