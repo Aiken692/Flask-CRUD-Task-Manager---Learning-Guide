@@ -39,7 +39,58 @@ Flask_App/
 
 ## 🚀 How to Run the App
 
-### Step 1: Install Dependencies
+### Step 1: Create a Virtual Environment
+
+A virtual environment keeps your project dependencies isolated from other Python projects.
+
+#### **Windows**
+
+1. **Create the virtual environment:**
+   ```bash
+   python -m venv venv
+   ```
+
+2. **Activate the virtual environment:**
+   ```bash
+   venv\Scripts\activate
+   ```
+   
+   You'll see `(venv)` appear in your terminal prompt when activated.
+
+3. **If you encounter "Access is denied" error with pip:**
+   ```bash
+   python -m pip install -r requirements.txt
+   ```
+
+4. **Deactivate when done:**
+   ```bash
+   deactivate
+   ```
+
+#### **macOS/Linux**
+
+1. **Create the virtual environment:**
+   ```bash
+   python3 -m venv venv
+   ```
+
+2. **Activate the virtual environment:**
+   ```bash
+   source venv/bin/activate
+   ```
+   
+   You'll see `(venv)` appear in your terminal prompt when activated.
+
+3. **Deactivate when done:**
+   ```bash
+   deactivate
+   ```
+
+> **Note:** The `venv` folder is already in `.gitignore`, so it won't be committed to version control.
+
+---
+
+### Step 2: Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -50,13 +101,13 @@ This installs:
 - **Flask-SQLAlchemy** - Database management
 - **Flask-SCSS** - SCSS compilation
 
-### Step 2: Run the Application
+### Step 3: Run the Application
 
 ```bash
 python app.py
 ```
 
-### Step 3: Open in Browser
+### Step 4: Open in Browser
 
 Go to: **http://localhost:5000**
 

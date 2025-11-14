@@ -1,6 +1,7 @@
 // Variables
-$primary-color: #667eea;
-$secondary-color: #764ba2;
+$primary-color: #06b6d4;
+$secondary-color: #0891b2;
+$tertiary-color: #0e7490;
 $text-dark: #333;
 $text-light: #666;
 $bg-light: #f8f9fa;
@@ -16,7 +17,7 @@ $white: white;
 // Body styles
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+    background: linear-gradient(135deg, $primary-color 0%, $secondary-color 50%, $tertiary-color 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
